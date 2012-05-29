@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Console2.6+asdoc" type="flex">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/thirdparty/Console2.6+asdoc.swc!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
