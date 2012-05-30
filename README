@@ -7,6 +7,6 @@ Just an ActionScript 3 project I made for Social Quantum job interview.
 TODO
 ====
 
- * Isometric depth sorting
+ * Rework isometric depth sorting (use linked lists and change only needed parts)
  * Unit tests
  * IDE-independent build configuration
