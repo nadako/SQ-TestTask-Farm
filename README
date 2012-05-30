@@ -9,3 +9,4 @@ TODO
 
  * Isometric depth sorting
  * Unit tests
+ * IDE-independent build configuration
