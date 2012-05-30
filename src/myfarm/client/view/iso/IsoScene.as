@@ -166,17 +166,61 @@ public class IsoScene
         if (!updates.length)
             return;
 
-        // TODO: depth sorting
+        // update display coordinates
         var coords:Point = new Point();
         for each (var isoObject:IsoObject in updates)
         {
-            transform.isoToScreen(new Point(isoObject.x, isoObject.y), coords);
+            transform.isoToScreen(isoObject.position, coords);
             isoObject.displayObject.x = coords.x;
             isoObject.displayObject.y = coords.y;
             isoObject.updating = false;
         }
 
+        // sort objects (FIXME: see function description)
+        sortDepths();
+
         updates.length = 0;
     }
+
+    /**
+     * Sort IsoObjects by isometric depth and arrange their
+     * display objects so they look properly.
+     *
+     * FIXME: This is highly unoptimal, because it resorts
+     * the whole collection of objects. One of idea is
+     * to change isoObject storage method to a linked list
+     * and carefully traverse it forward and back for each object.
+     */
+    private function sortDepths():void
+    {
+        _isoObjects.sort(compareDepth);
+        var isoObject:IsoObject;
+        for (var i:uint = 0; i < _isoObjects.length; i++)
+        {
+            isoObject = _isoObjects[i];
+            container.setChildIndex(isoObject.displayObject, i);
+        }
+    }
+
+    /**
+     * Compare function that returns IsoObject's display depth
+     * based on its coordinates.
+     *
+     * @param a first object
+     * @param b second object
+     * @return -1 if a is lower than b, 1 if a is higher, 0 if equal
+     */
+    private function compareDepth(a:IsoObject, b:IsoObject):int
+    {
+        var aDepth:Number = transform.getDepth(a.position);
+        var bDepth:Number = transform.getDepth(b.position);
+        if (aDepth < bDepth)
+            return 1;
+        else if (aDepth > bDepth)
+            return -1;
+        else
+            return 0;
+    }
+
 }
 }

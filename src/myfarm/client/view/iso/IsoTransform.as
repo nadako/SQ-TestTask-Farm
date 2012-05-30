@@ -24,5 +24,10 @@ public class IsoTransform implements IIsoTransform
         result.y = screenPoint.x * 0.5 + screenPoint.y;
         return result;
     }
+
+    public function getDepth(isoCoords:Point):Number
+    {
+        return isoCoords.x - isoCoords.y;
+    }
 }
 }

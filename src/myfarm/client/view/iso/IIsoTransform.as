@@ -10,5 +10,7 @@ public interface IIsoTransform
     function isoToScreen(isoPoint:Point, result:Point = null):Point;
 
     function screenToIso(screenPoint:Point, result:Point = null):Point;
+
+    function getDepth(coords:Point):Number;
 }
 }
