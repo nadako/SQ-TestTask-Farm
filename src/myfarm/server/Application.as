@@ -101,7 +101,7 @@ public class Application
 
         var plantType:PlantType = plantTypes[type];
         var area:Rectangle = new Rectangle(x, y,  plantType.size.x,  plantType.size.y);
-        if (!cellMap.isAreaFree(area))
+        if (!(cellMap.isAreaInBounds(area) && cellMap.isAreaFree(area)))
             throw new ApplicationError("Area is not free for plant " + type + ": x=" + x + ", y=" + y + ", size=" + plantType.size);
 
         // mark cells as occupied
