@@ -3,6 +3,7 @@ package myfarm.client.view.iso
 import flash.display.DisplayObject;
 import flash.events.EventDispatcher;
 import flash.events.MouseEvent;
+import flash.geom.Point;
 
 import myfarm.common.IDisposable;
 
@@ -22,8 +23,7 @@ import myfarm.common.IDisposable;
 public class IsoObject extends EventDispatcher implements IDisposable
 {
     private var _displayObject:DisplayObject;
-    private var _x:Number = 0;
-    private var _y:Number = 0;
+    private var _position:Point = new Point(0, 0);
 
     internal var scene:IsoScene;
     internal var updating:Boolean = false;
@@ -50,29 +50,43 @@ public class IsoObject extends EventDispatcher implements IDisposable
 
     public function get x():Number
     {
-        return _x;
+        return _position.x;
     }
 
     public function set x(value:Number):void
     {
-        if (_x == value)
+        if (_position.x == value)
             return;
 
-        _x = value;
+        _position.x = value;
         markForUpdating();
     }
 
     public function get y():Number
     {
-        return _y;
+        return _position.y;
     }
 
     public function set y(value:Number):void
     {
-        if (_y == value)
+        if (_position.y == value)
             return;
 
-        _y = value;
+        _position.y = value;
+        markForUpdating();
+    }
+
+    public function get position():Point
+    {
+        return _position;
+    }
+
+    public function set position(value:Point):void
+    {
+        if (_position.equals(value))
+            return;
+
+        _position = value;
         markForUpdating();
     }
 
